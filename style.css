@@ -1,0 +1,26 @@
+body {
+    background: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+#project {
+    border-radius: 20px;
+    margin-top: 250px;
+    padding: 20px;
+    background: blanchedalmond;
+    color: teal;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#project button {
+    padding: 10px;
+    color: white;
+    background: yellowgreen;
+    border-radius: 10px;
+}
