@@ -18,9 +18,18 @@ body {
     align-items: center;
     flex-direction: column;
 }
-#project button,  #project a{
+button, a {
     padding: 10px;
     color: white;
     background: yellowgreen;
     border-radius: 10px;
+    text-decoration: none;
+    width: 200px;
+    margin-left: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

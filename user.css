@@ -1,0 +1,51 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: lightslategrey;
+}
+.user-profile {
+    margin-left: 30px;
+}
+#content {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px;
+}
+img {
+    border-radius: 50%;
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.userInfo{
+    background-color: wheat;
+    width: 375px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    margin-top: 20px;
+}
+.user-container {
+    line-height: 2;
+}
+#btn{
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 20px;
+    color: white;
+    background:royalblue;
+    border-radius: 40px;
+    width: 150px;
+    text-align: center;
+}
+.btn-del{
+    padding: 10px;
+    background: crimson;
+    border-radius: 10px;
+    color: white;
+}
