@@ -13,12 +13,13 @@ function newUser() { // New User Function
     { "fullName" : document.getElementById("fullName").value,
        "email" : document.getElementById("email").value,
        "phone" : document.getElementById("phone").value,
-       "pics" : `./images/${internalUsers.length}.jpg`
+       "pics" : reader.result
      };
     localStorage.setItem("internalUsers",JSON.stringify(internalUsers)) //Storing User info in Local Storage
     contentDisplay(); //New DEtails are updated
     closeForm(); //New User Pop Up form closed
 }
+
 function openForm() {
     formContent = `
     <h1>Fill in the form to Register a User</h1> 
@@ -26,12 +27,17 @@ function openForm() {
         <input type="text" id="fullName" placeholder="Full name" required> <br>
         <input type="text" id="email" placeholder="Email" required> <br>
         <input type="text" id="phone" placeholder="Phone" required> <br>
-        <button class="formBtn" type="submit">Add new user</button> 
-        <button class="formBtn" onClick="closeForm()" > Close</button>
+        <input type="file" id="profilePic" required>
+        <button class="formBtn">Add new user</button> 
+        <button class="formBtn" onClick="closeForm()"> Close</button>
     </form>
 `
-  document.getElementById("contactForm").innerHTML = formContent;
-  document.getElementById("contactForm").style.display = "block";
+  document.getElementById("NewUserForm").innerHTML = formContent;
+  document.getElementById("NewUserForm").style.display = "block";
+  document.querySelector("#profilePic").addEventListener("change", function() {
+    reader = new FileReader();
+    reader.readAsDataURL(this.files[0]);
+})
 }
 
 function editForm(userId) {
@@ -39,21 +45,26 @@ function editForm(userId) {
     <h1>Edit User Form</h1>
     <form onsubmit="editUser(${userId});" action="#">
         <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" value="${internalUsers[userId].fullName}" required> <br>
+        <input type="text" id="fullName" value="${internalUsers[userId].fullName}"> <br>
         <label for="email">Email</label>
-        <input type="text" id="email" value="${internalUsers[userId].email}" required> <br>
+        <input type="text" id="email" value="${internalUsers[userId].email}"> <br>
         <label for="phone">Phone Number</label>
-        <input type="text" id="phone" value="${internalUsers[userId].phone}" required> <br>
+        <input type="text" id="phone" value="${internalUsers[userId].phone}"> <br>
+        <input type="file" id="editProfilePic">
         <button class="formBtn" type="submit">Edit user</button> 
-        <button class="formBtn" onClick="closeForm()"> Close</button>
+        <button class="formBtn" onClick="closeForm()">Close</button>
     </form>
 `
 document.getElementById("editForm").innerHTML = formContent;
 document.getElementById("editForm").style.display = "block";
+document.querySelector("#editProfilePic").addEventListener("change", function() {
+    editReader = new FileReader();
+    editReader.readAsDataURL(this.files[0]);
+})
 }
 
 function closeForm() { //Close form function
-    document.getElementById("contactForm").style.display = "none";
+    document.getElementById("NewUserForm").style.display = "none";
     document.getElementById("editForm").style.display = "none";
 }
 
@@ -63,7 +74,7 @@ function editUser(userId) {
     { "fullName" : document.getElementById("fullName").value,
        "email" : document.getElementById("email").value,
        "phone" : document.getElementById("phone").value,
-       "pics" : `./images/${userId}.jpg`
+       "pics" : editReader.result
      };
     localStorage.setItem("internalUsers",JSON.stringify(internalUsers))
     contentDisplay();

@@ -49,27 +49,8 @@ img {
     border-radius: 10px;
     color: white;
 }
-h1{ margin: 0; }
-#contact { 
-  -webkit-user-select: none; /* Chrome/Safari */        
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+ */
-  margin: 4em auto;
-  width: 100px; 
-  height: 30px; 
-  line-height: 30px;
-  background: teal;
-  color: white;
-  font-weight: 700;
-  text-align: center;
-  cursor: pointer;
-  border: 1px solid white;
-}
 
-#contact:hover { background: #666; }
-#contact:active { background: #444; }
-
-#contactForm, #editForm { 
+#NewUserForm, #editForm { 
   display: none;
 
   border: 6px solid salmon; 
