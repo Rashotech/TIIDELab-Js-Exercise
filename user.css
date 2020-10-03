@@ -50,7 +50,7 @@ img {
     color: white;
 }
 
-#NewUserForm, #editForm { 
+#NewUserForm, #editForm, #SearchForm { 
   display: none;
 
   border: 6px solid salmon; 
@@ -81,11 +81,13 @@ textarea { height: 80px; resize: none; }
 .formBtn { 
   width: 140px;
   display: inline-block;
-  
   background: teal;
   color: #fff;
   font-weight: 100;
   font-size: 1.2em;
   border: none;
   height: 30px;
+}
+#SearchForm .formBtn {
+    margin: 5px;
 }

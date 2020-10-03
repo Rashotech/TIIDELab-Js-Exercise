@@ -6,7 +6,7 @@ if(internalUsers == null) {
     internalUsers = []; 
     //assign an empty array if no user is found
    }
-
+//No User Message
 function newUser() { // New User Function
     // Adding user object to the InternalUser Array
     internalUsers[internalUsers.length] = 
@@ -40,17 +40,30 @@ function openForm() {
 })
 }
 
+function SearchForm() {
+    formContent = `
+    <form action="#">
+        <input type="text" id="search" placeholder="Search name" required> <br>
+        <button class="formBtn" onClick="SearchUser()">Search Filter</button>
+        <button class="formBtn" onClick="SearchSingleUser()">Search Find</button> 
+        <button class="formBtn" onClick="SearchAllUser()">Search Include</button>
+    </form>
+`
+  document.getElementById("SearchForm").innerHTML = formContent;
+  document.getElementById("SearchForm").style.display = "block";
+}
+
 function editForm(userId) {
     formContent = `
     <h1>Edit User Form</h1>
     <form onsubmit="editUser(${userId});" action="#">
         <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" value="${internalUsers[userId].fullName}"> <br>
+        <input type="text" id="fullName" value="${internalUsers[userId].fullName}" required> <br>
         <label for="email">Email</label>
-        <input type="text" id="email" value="${internalUsers[userId].email}"> <br>
+        <input type="text" id="email" value="${internalUsers[userId].email}" required> <br>
         <label for="phone">Phone Number</label>
-        <input type="text" id="phone" value="${internalUsers[userId].phone}"> <br>
-        <input type="file" id="editProfilePic">
+        <input type="text" id="phone" value="${internalUsers[userId].phone}" required> <br>
+        <input type="file" id="editProfilePic" required>
         <button class="formBtn" type="submit">Edit user</button> 
         <button class="formBtn" onClick="closeForm()">Close</button>
     </form>
@@ -66,6 +79,8 @@ document.querySelector("#editProfilePic").addEventListener("change", function() 
 function closeForm() { //Close form function
     document.getElementById("NewUserForm").style.display = "none";
     document.getElementById("editForm").style.display = "none";
+    document.getElementById("SearchForm").style.display = "none";
+
 }
 
 function editUser(userId) {
@@ -79,6 +94,74 @@ function editUser(userId) {
     localStorage.setItem("internalUsers",JSON.stringify(internalUsers))
     contentDisplay();
     closeForm();
+}
+
+function SearchUser(){
+    param =(document.getElementById("search").value).toLowerCase();
+    internalUsers = internalUsers.filter(x=>(x.fullName.toLowerCase()) === param);
+    if (internalUsers == null || internalUsers == undefined || internalUsers==""){
+        alert(`No record for Found for ${param}`);
+        closeForm();
+    }
+    else {
+        SearchResultNo ="";
+        if (internalUsers.length === 1) {
+            SearchResultNo+= 
+            `<div><h3>${internalUsers.length} User Found</h3></div>`
+        } else {
+            SearchResultNo+= 
+            `<div><h3>${internalUsers.length} Users Found</h3></div>`
+        }
+        document.getElementById("SearchResult").innerHTML = `${SearchResultNo}`;
+        contentDisplay();
+        closeForm();
+    }
+}
+
+function SearchAllUser(){
+    param =(document.getElementById("search").value).toLowerCase();
+    internalUsers = internalUsers.filter(x=>x.fullName.toLowerCase().includes(param));
+    if (internalUsers == null || internalUsers == undefined || internalUsers==""){
+        alert(`No record for Found for ${param}`);
+        closeForm();
+    }
+    else {
+        SearchResultNo ="";
+        if (internalUsers.length === 1) {
+            SearchResultNo+= 
+            `<div><h3>${internalUsers.length} User Found</h3></div>`
+        } else {
+            SearchResultNo+= 
+            `<div><h3>${internalUsers.length} Users Found</h3></div>`
+        }
+        document.getElementById("SearchResult").innerHTML = `${SearchResultNo}`;
+        contentDisplay();
+        closeForm();
+    }
+}
+
+function SearchSingleUser(){
+    param =(document.getElementById("search").value).toLowerCase();
+    NewInternalUsers = internalUsers.find(x=>(x.fullName.toLowerCase()) === param);
+    if ( NewInternalUsers == null ||  NewInternalUsers == undefined ||  NewInternalUsers==""){
+        alert(`No record for Found for ${param}`);
+        closeForm();
+    }
+    else {
+        internalUsers= [];
+        internalUsers.push(NewInternalUsers);
+        SearchResultNo ="";
+        if (internalUsers.length === 1) {
+            SearchResultNo+= 
+            `<div><h3>${internalUsers.length} User Found</h3></div>`
+        } else {
+            SearchResultNo+= 
+            `<div><h3>${internalUsers.length} Users Found</h3></div>`
+        }
+        document.getElementById("SearchResult").innerHTML = `${SearchResultNo}`;
+        contentDisplay();
+        closeForm();
+    }
 }
 
 function deleteUser(userId) { // InterUser delete function
@@ -111,6 +194,10 @@ function contentDisplay() { //Function to render User Details Content
             `;
         }
     }
+    // if (internalUsers.length<1) {
+    //     NoUser = `<h2>No Internal User Yet. Add one now</h2>`
+    //     document.getElementById("SearchResult").innerHTML = `${NoUser}`;
+    // }
     document.getElementById("content").innerHTML = `${content}`;
 }
 contentDisplay()
