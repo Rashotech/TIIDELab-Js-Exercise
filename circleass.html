@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .message {
+          font-size: 35px;
+          line-height: 200px;
+          font-weight: bolder;
+          color:#FFF;
+          text-align: center;
+        }
+        .circle {
+          transition-property: width, height, margin-left, margin-top;
+          transition-duration: 3s;
+          position: fixed;
+          transform: translateX(-50%) translateY(-50%);
+          background-color: palevioletred;
+          border-radius: 50%;
+        }
+      </style>
+</head>
+<body>
+    <button onclick="showMessage()">Show Message</button>
+    <script>
+function showMessage() {
+    drawCircle(150, 150, 100).then(div => {
+      div.classList.add('message');
+      div.append("Tiide Lab...");
+    });
+  }
+  function drawCircle(cx, cy, radius) {
+    let div = document.createElement('div');
+    div.style.width = 0;
+    div.style.height = 0;
+    div.style.left = cx + 'px';
+    div.style.top = cy + 'px';
+    div.className = 'circle';
+    document.body.append(div);
+    return new Promise(resolve => {
+      setTimeout(() => {
+        div.style.width = radius * 3 + 'px';
+        div.style.height = radius * 3 + 'px';
+        div.addEventListener('transitionend', function handler() {
+          resolve(div);
+        });
+      }, 0);
+    })
+  }
+    </script>
+</body>
+</html>
