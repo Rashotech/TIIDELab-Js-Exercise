@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #area {
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+<body>
+    <div id="area">
+        <div id="one" class="parentContainer" style="width: 600px; height: 500px; background-color: lightpink;" ondrop="drop(event)" ondragover="DropAble(event)"></div>
+        <div id="two" class="parentContainer" style="width: 600px; height: 500px; background-color: blue;" ondrop="drop(event)" ondragover="DropAble(event)"></div>
+    </div>
+    
+    <p></p>
+    <p></p>
+    <img src="./images/tcl.png" id="img1" draggable="true" ondragstart="drag(event)">
+    <img src="./images/10.jpg" id="img2" draggable="true" ondragstart="drag(event)">
+</body>
+<script>
+    function doNotVisit(e) {
+        e.preventDefault();
+    }
+
+    function DropAble(e) {
+        e.preventDefault();
+    }
+
+    function drag(e) {
+        e.dataTransfer.setData("ID", e.target.id);
+    }
+    function drop(e) {
+        data = e.dataTransfer.getData("ID")
+        alert(data)
+        if (data === "img1") {
+            name = "TechSpecialist"
+        } else {
+            name = "TIIDELab"
+        }
+        element = document.getElementById(data)
+        newElement = document.createElement("img")
+        newElement.src = element.src
+        elementId = e.target.id
+        if (elementId === "one") {
+            position = 0;
+        } else {
+            position = 1;
+        } 
+        container = document.getElementsByClassName("parentContainer")[position]
+        container.appendChild(newElement)
+        container.append(name)
+    }
+</script>
+</html>

@@ -13,7 +13,7 @@ function newUser() { // New User Function
     { "fullName" : document.getElementById("fullName").value,
        "email" : document.getElementById("email").value,
        "phone" : document.getElementById("phone").value,
-       "pics" : reader.result
+       "pics" : reader.result  // uploaded image string url stored in pics key
      };
     localStorage.setItem("internalUsers",JSON.stringify(internalUsers)) //Storing User info in Local Storage
     contentDisplay(); //New DEtails are updated
@@ -27,16 +27,17 @@ function openForm() {
         <input type="text" id="fullName" placeholder="Full name" required> <br>
         <input type="text" id="email" placeholder="Email" required> <br>
         <input type="text" id="phone" placeholder="Phone" required> <br>
-        <input type="file" id="profilePic" required>
+        <input type="file" id="profilePic" required> 
         <button class="formBtn">Add new user</button> 
         <button class="formBtn" onClick="closeForm()"> Close</button>
     </form>
 `
   document.getElementById("NewUserForm").innerHTML = formContent;
   document.getElementById("NewUserForm").style.display = "block";
+//   File upload function once file has been selected 
   document.querySelector("#profilePic").addEventListener("change", function() {
-    reader = new FileReader();
-    reader.readAsDataURL(this.files[0]);
+    reader = new FileReader(); //filereader for upload function called
+    reader.readAsDataURL(this.files[0]); // file(image) converted to string
 })
 }
 

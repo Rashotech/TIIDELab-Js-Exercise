@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lat</title>
+</head>
+<body>
+    <div id="demo"></div>
+</body>
+<script type="module">
+import LatLon from 'https://cdn.jsdelivr.net/npm/geodesy@2.2.1/latlon-spherical.min.js';
+var x = document.getElementById("demo");
+var la = "";
+var lon = "";
+window.onload = function() {
+    getLocation()
+}
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+  la = position.coords.latitude;
+  lon = position.coords.longitude
+}
+const p1 = new LatLon(la, lon);
+const p2 = new LatLon(6.453056, 3.395833);
+const d = p1.distanceTo(p2);
+console.log(d) // 404.3×10³ m
+</script>
+</html>
