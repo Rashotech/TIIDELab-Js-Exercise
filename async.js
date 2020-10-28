@@ -13,6 +13,6 @@ async function loadVideo(src) {
     // vid.onloadstart = function() {
     // }; 
     } catch(error){
-        alert("Video cannot play now!")
+        alert("Video cannot Play unless you Give permission for autoplay")
     }
 }
